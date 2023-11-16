@@ -3,7 +3,7 @@
 terraform {
   backend "s3" {
     # Replace this with your bucket name!
-    bucket         = "tosinbuck"
+    bucket         = "mypatchshellscript"
     key            = "jjtech/terraform.tfstate"
     region         = "us-east-1"
 
