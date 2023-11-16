@@ -16,7 +16,7 @@ pipeline {
     stage('Git Checkout') {
       steps {
         echo 'Cloning the application code...'
-        git branch: 'main', url: 'https://github.com/anselmenumbisia/jjtech-ci-cd-pipeline-project-k8s.git'
+        git branch: 'main', url: 'https://github.com/Tosyno2021/Pipeline-CICD-Project.git'
       }
     }
 
@@ -89,7 +89,7 @@ pipeline {
     }
     stage('Static Code Analysis') {
       environment {
-        SONAR_URL = "http://172.31.61.26:9000/"
+        SONAR_URL = "http://http://52.201.220.222:9000/"
       }
       steps {
         withCredentials([string(credentialsId: 'sonarqube-token', variable: 'SONAR_AUTH_TOKEN')]) {
@@ -113,11 +113,11 @@ pipeline {
 
     stage('Build and Push Docker Image') {
       environment {
-        awsAccountId = '389029577690'
+        awsAccountId = '303821179855'
         region = 'us-east-1'
-        repositoryName = 'jjtech-demo'
+        repositoryName = 'docker-reg-repo'
         dockerImageTag = "${BUILD_NUMBER}"
-        ecrRegistry = "${awsAccountId}.dkr.ecr.${region}.amazonaws.com"
+        ecrRegistry = "${303821179855}.dkr.ecr.${us-east-1}.amazonaws.com"
       }
       steps {
         script {
@@ -163,7 +163,7 @@ pipeline {
           script {
             sh "sed -i 's/replaceImageTag/${BUILD_NUMBER}/g' k8s-manifests/deployment.yaml"
             dir('k8s-manifests'){      
-            sh "aws eks update-kubeconfig --name ${clusterName} --region ${region}"
+            sh "aws eks update-kubeconfig --name ${clusterName} --region ${us-east-1}"
             sh "kubectl apply -f ."
       }
         }
