@@ -3,12 +3,12 @@
 terraform {
   backend "s3" {
     # Replace this with your bucket name!
-    bucket         = "mypatchshellscript"
+    bucket         = "mycicd-buck"
     key            = "jjtech/terraform.tfstate"
     region         = "us-east-1"
 
     # Replace this with your DynamoDB table name!
-    dynamodb_table = "CICD-Table"
+    dynamodb_table = "cicd_dynamodb"
   }
   
   required_providers {
